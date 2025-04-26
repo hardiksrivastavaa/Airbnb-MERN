@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Airbnb listings</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+
+
+  <form action="/listings/<%= listing._id %>?_method=PUT" method="post" class="listing-container">
+    <h1>New Listing</h1>
+    <input type="text" id="title" name="listing[title]" placeholder="Enter the title" value="<%=listing.title %>"" required
+    />
+    <textarea id=" description" name="listing[description]" placeholder="Enter the description" required>
+    <%= listing.description %></textarea>
+      <input type="number" id="price" name="listing[price]" placeholder="Enter the price" value="<%=listing.price %>"
+        required />
+      <input type="url" id="image" name="listing[image]" placeholder="Enter the image URL" value="<%=listing.image %>"
+        required />
+      <input type="text" id="location" name="listing[location]" placeholder="Enter the location" value="<%=listing.location
+      %>" required />
+      <input type="text" id="country" name="listing[country]" placeholder="Enter the country"
+        value="<%=listing.country %>" required />
+
+      <div id="new-btns">
+        <button type="submit" id="update-btn" class="btn">Update</button>
+        <a href="/listings/<%= listing._id %>" id="cancel-btn" class="btn">Cancel</a>
+      </div>
+  </form>
+
+
+  </div>
+
+</body>
+
+</html>

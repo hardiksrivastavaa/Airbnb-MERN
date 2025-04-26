@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const dontenv = require('dotenv').config();
-const listing = require("./models/listing.js");
-
+const dontenv = require("dotenv").config();
+const Listing = require("./models/listing.js");
+const path = require("path");
+const methodOverride = require("method-override");
 const MongoURL = process.env.MONGO_URL;
 
 main()
@@ -14,28 +15,72 @@ main()
         console.error("Error connecting to MongoDB", err);
     });
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(methodOverride("_method"));
+
 async function main() {
     await mongoose.connect(MongoURL);
 }
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
+// Index Route
+app.get("/listings", async (req, res) => {
+    const allListings = await Listing.find({});
+    res.render("listings/index.ejs", { allListings });
 });
 
-app.get("/testListing", async (req, res) => {
-    let sampleListing = new listing({
-        title: "Rama Niwas",
-        description: "Srivastava's Home",
-        price: 100,
-        location: "Raebareli",
-        country: "India",
-    });
-
-    await sampleListing.save();
-    console.log("Sample Listing Created");
-    res.send("Sample Listing Created");
+//New Route
+app.get("/listings/new", (req, res) => {
+    res.render("listings/new.ejs");
 });
 
-app.listen(8080, () => {
+// Create Route
+app.post("/listings/new", async (req, res) => {
+    {
+        const newListing = new Listing(req.body.listing);
+        await newListing.save();
+        res.redirect("/listings");
+    }
+});
+
+// Show Route
+app.get("/listings/:id", async (req, res) => {
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/show.ejs", { listing });
+});
+
+// Edit Route
+app.get("/listings/:id/edit", async (req, res) => {
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/edit.ejs", { listing });
+});
+
+// Update Route
+app.put("/listings/:id", async (req, res) => {
+    const { id } = req.params;
+    const updatedListing = await Listing.findByIdAndUpdate(
+        id,
+        { ...req.body.listing },
+        {
+            new: true,
+            runValidators: true,
+        }
+    );
+    res.redirect(`/listings/${id}`);
+});
+
+// Delete Route
+app.delete("/listings/:id", async (req, res) => {
+    const { id } = req.params;
+    await Listing.findByIdAndDelete(id);
+    res.redirect("/listings");
+});
+
+app.listen(process.env.PORT || 8080, () => {
     console.log("Server is running on port 8080");
 });

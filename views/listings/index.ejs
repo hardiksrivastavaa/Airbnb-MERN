@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Listings</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    
+    <div class="listing-container">
+
+    <h1>All Listings</h1>
+    <a href="/listings/new" id="new-btn" class="btn">New Listing</a>
+    <ol class="listing-list">
+        <% allListings.forEach((listing) => { %>
+            <li>
+                <h2><%= listing.title %></h2>
+                <p><%= listing.description %></p>
+                <p>Price: &#x20b9;<%= listing.price.toLocaleString("en-IN") %></p>
+                <p>Image: <a href=<%= listing.image %>>Click Here</a></p>
+                <p>Location: <%= listing.location %></p>
+                <p>Country: <%= listing.country %></p>
+                <a href="/listings/<%= listing._id %>">Show Listing</a>
+            </li>
+        <% }); %>
+    </ol>
+
+</div>
+</body>
+</html>

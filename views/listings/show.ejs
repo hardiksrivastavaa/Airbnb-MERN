@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Airbnb listing</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+
+  <div class="single-list">
+
+    <h1>
+      <%= listing.title %>
+    </h1>
+    <img src=<%=listing.image %> alt=<%= listing.title %>>
+      <p>
+        <%= listing.description %>
+      </p>
+      <p>Price: &#x20b9;<%= listing.price.toLocaleString("en-IN") %>
+      </p>
+      <p>Location: <%= listing.location %>
+      </p>
+      <p>Country: <%= listing.country %>
+      </p>
+
+      <div id="new-btns">
+        <a href="/listings/<%= listing._id %>/edit" id="edit-btn" class="btn">Edit</a>
+        <a href="/listings" id="cancel-btn" class="btn">Back</a>
+        <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="delete-form">
+          <button type="submit" id="delete-btn" class="btn">Delete</button>
+        </form>
+      </div>
+
+
+  </div>
+
+</body>
+
+</html>
