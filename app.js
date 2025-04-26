@@ -5,6 +5,7 @@ const dontenv = require("dotenv").config();
 const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
 const MongoURL = process.env.MONGO_URL;
 
 main()
@@ -21,6 +22,8 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
+app.engine('ejs', ejsMate);
+
 
 async function main() {
     await mongoose.connect(MongoURL);

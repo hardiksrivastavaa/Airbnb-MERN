@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airbnb Listings</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-    
-    <div class="listing-container">
+<% layout("/layouts/boilerplate") %>
+        <div class="listing-container">
 
     <h1>All Listings</h1>
-    <a href="/listings/new" id="new-btn" class="btn">New Listing</a>
     <ol class="listing-list">
         <% allListings.forEach((listing) => { %>
             <li>
@@ -27,5 +17,3 @@
     </ol>
 
 </div>
-</body>
-</html>
