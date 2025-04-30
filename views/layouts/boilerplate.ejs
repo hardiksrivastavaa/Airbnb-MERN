@@ -23,7 +23,13 @@
 
     <%- include("../includes/navbar.ejs") %>
 
-        <div class="boilerplate"><%- body %></div>
+        <div class="boilerplate">
+
+            <%- include("../includes/flash.ejs") %>
+
+            <%- body %>
+        
+        </div>
 
         <%- include("../includes/footer.ejs") %>
 
