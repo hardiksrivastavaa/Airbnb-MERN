@@ -12,18 +12,26 @@
           <%= listing.description %>
         </p>
         <p class="card-text fw-semibold">
-          Price: &#x20b9;<%= listing.price.toLocaleString("en-IN") %> <br />
-            Location: <%= listing.location %> <br />
-              Country: <%= listing.country %>
+          Owner : <%= listing.owner.username %> <br>
+            Price: &#x20b9;<%= listing.price.toLocaleString("en-IN") %> <br />
+              Location: <%= listing.location %> <br />
+                Country: <%= listing.country %>
         </p>
 
-        <div class="d-flex justify-content-center gap-2">
-          <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary">Edit</a>
+        <div class="d-flex justify-content-start gap-2">
           <a href="/listings" class="btn btn-secondary">Back</a>
-          <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
-            <button type="submit" class="btn btn-danger w-100">Delete</button>
-          </form>
+
+          <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
+
+            <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary">Edit</a>
+            <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
+              <button type="submit" class="btn btn-danger w-100">Delete</button>
+            </form>
+            <% } %>
+
         </div>
+
+        <% if (currUser) { %>
 
         <hr class="my-4" />
 
@@ -41,6 +49,8 @@
           </form>
         </div>
 
+        <% } %>
+
         <% if (listing.reviews && listing.reviews.length> 0) { %>
 
           <hr class="my-4" />
@@ -52,7 +62,7 @@
               <div class="card mb-2 ms-2 col-lg-5 col-md-5">
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title fw-semibold">Hardik Srivastava</h5>
+                    <h5 class="card-title fw-semibold"><%= review.author.username %></h5>
                     <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
                       <button class="btn border-0 fs-5">
                         <i class="fa-solid fa-trash-can text-danger"></i>
