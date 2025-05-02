@@ -10,5 +10,6 @@
 - Node.js
 - MongoDB
 - Cloudinary
+- Vercel
 
 
