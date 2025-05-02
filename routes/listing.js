@@ -27,6 +27,9 @@ router
 // Show form to create a new listing
 router.get("/new", isLoggedIn, listingController.renderNewListingForm);
 
+router.get("/category/:category", wrapAsync(listingController.renderCategoryListings));
+
+router.get("/search", listingController.searchListings);
 router
     .route("/:id")
     .get(wrapAsync(listingController.showSpecificListing))

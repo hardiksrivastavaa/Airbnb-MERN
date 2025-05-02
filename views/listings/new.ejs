@@ -10,7 +10,7 @@
         <h1 class="text-center mb-3">New Listing</h1>
 
         <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
+          <label for="title" class="form-label fw-semibold">Title</label>
           <input type="text" id="title" name="listing[title]" class="form-control" placeholder="Enter the title"
             required />
           <div class="valid-feedback">Title Looks good!</div>
@@ -18,7 +18,21 @@
         </div>
 
         <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
+          <label for="category" class="form-label fw-semibold">Category</label>
+          <select name="listing[category]" id="category" class="form-select" required>
+            <option value="" selected disabled>Select Category</option>
+            <option value="mountains">Mountains</option>
+            <option value="cities">Cities</option>
+            <option value="beaches">Beaches</option>
+            <option value="castles">Castles</option>
+            <option value="artics">Artics</option>
+          </select>
+          <div class="valid-feedback">Category looks good!</div>
+          <div class="invalid-feedback">Please select a valid category!</div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="description" class="form-label fw-semibold">Description</label>
           <textarea id="description" name="listing[description]" class="form-control"
             placeholder="Enter the description" required></textarea>
           <div class="valid-feedback">Description Looks good!</div>
@@ -26,7 +40,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="image" class="form-label">Image</label>
+          <label for="image" class="form-label fw-semibold">Image</label>
           <input type="file" id="image" name="listing[image]" class="form-control" accept=".jpg, .jpeg, .png" required />
           <small class="form-text text-danger">Supported formats: JPG, JPEG, PNG</small>
           <div class="valid-feedback">Great! Your image has been uploaded successfully.</div>
@@ -36,14 +50,14 @@
         <div class="row">
 
           <div class="mb-3 col-md-4">
-            <label for="price" class="form-label">Price</label>
+            <label for="price" class="form-label fw-semibold">Price</label>
             <input id="price" name="listing[price]" class="form-control" placeholder="Enter the price" required />
             <div class="valid-feedback">Price Looks good!</div>
             <div class="invalid-feedback">Valid Price Should be Entered!</div>
           </div>
 
           <div class="mb-3 col-md-8">
-            <label for="country" class="form-label">Country</label>
+            <label for="country" class="form-label fw-semibold">Country</label>
             <input type="text" id="country" name="listing[country]" class="form-control"
               placeholder="Enter the country eg. India" required />
             <div class="valid-feedback">Country Looks good!</div>
@@ -53,7 +67,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="location" class="form-label">Location</label>
+          <label for="location" class="form-label fw-semibold">Location</label>
           <input type="text" id="location" name="listing[location]" class="form-control"
             placeholder="Enter the location eg. Raebareli" required />
           <div class="valid-feedback">Location Looks good!</div>

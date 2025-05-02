@@ -16,6 +16,20 @@
         </div>
 
         <div class="mb-3">
+          <label for="category" class="form-label fw-semibold">Category</label>
+          <select name="listing[category]" id="category" class="form-select" required>
+            <option value="" selected disabled>Select Category</option>
+            <option value="mountains">Mountains</option>
+            <option value="cities">Cities</option>
+            <option value="beaches">Beaches</option>
+            <option value="castles">Castles</option>
+            <option value="artics">Artics</option>
+          </select>
+          <div class="valid-feedback">Category looks good!</div>
+          <div class="invalid-feedback">Please select a valid category!</div>
+        </div>
+
+        <div class="mb-3">
           <label for="description" class="form-label">Description</label>
           <textarea id="description" name="listing[description]" class="form-control"
             placeholder="Enter the description" required><%= listing.description %>

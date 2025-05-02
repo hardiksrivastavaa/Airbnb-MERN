@@ -10,7 +10,8 @@ module.exports.listingSchema = Joi.object({
         geometry: Joi.object({
             type: Joi.string().valid("Point").required(),
             coordinates: Joi.array().items(Joi.number()).length(2).required()
-        }).required()
+        }).required(),
+        category: Joi.string().valid('mountains', 'cities', 'beaches', 'castles', 'artics').required()
     }).required(),
 });
 

@@ -14,20 +14,25 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
       <div class="navbar-nav fw-semibold fs-5 bg-white">
-        <a class="nav-link" href="/">Home</a>
         <a class="nav-link" href="/listings">All Listings</a>
-        <a class="nav-link" href="/listings/new">Add New Listing</a>
       </div>
 
+      <div class="navbar-nav ms-auto p-2 bg-white d-none d-lg-block">
+        <form class="d-flex" role="search" action="/listings/search" method="GET">
+          <input class="form-control me-2 rounded-pill px-5 fs-6 fw-semibold" type="search" name="query" placeholder="Search Destination" aria-label="Search">
+          <button class="btn btn-search fw-bold rounded-pill" type="submit"><i class="fa-solid fa-magnifying-glass d-inline mx-1"></i>Search</button>
+        </form>
+      </div>
+      
       <div class="navbar-nav fw-semibold fs-5 bg-white ms-auto">
-
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
         <% if (!currUser) { %>
-          <a class="nav-link" href="/signup">Sign up</a>
-          <a class="nav-link" href="/login">Log In</a>
+          <a class="nav-link fw-semibold" href="/signup">Sign up</a>
+          <a class="nav-link fw-semibold" href="/login">Log In</a>
         <% } %>
 
         <% if (currUser) { %>
-              <a class="nav-link" href="/logout">Log out</a>
+              <a class="nav-link fw-bold" href="/logout">Log out</a>
         <% } %>
 
       </div>

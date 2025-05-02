@@ -59,6 +59,12 @@ body {
 
 #submit-btn {
     background-color: #fe424d;
+    color: white;
+}
+
+.btn-search {
+    background-color: #fe424d !important;
+    color: white !important;
 }
 
 .btn:hover {
@@ -68,4 +74,14 @@ body {
 
 #map {
     height: 500px;
+}
+
+.filter {
+    opacity: 0.8;
+}
+
+.filter:hover {
+    opacity: 1;
+    font-weight: bold;
+    cursor: pointer;
 }

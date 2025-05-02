@@ -6,6 +6,22 @@ module.exports.renderListings = async (req, res) => {
     res.render("listings/index.ejs", { allListings });
 };
 
+module.exports.renderCategoryListings = async (req, res) => {
+    const { category } = req.params;
+    const listings = await Listing.find({ category });
+    res.render("listings/index", { allListings: listings });
+};
+
+// In your routes
+module.exports.searchListings = async (req, res) => {
+    const query = req.query.query; // Get search query from URL parameters
+    const listings = await Listing.find({
+        title: { $regex: query, $options: "i" } // 'i' for case-insensitive matching
+    });
+    res.render("listings/index", { allListings: listings });
+};
+
+
 // Render form to create a new listing
 module.exports.renderNewListingForm = (req, res) => {
     res.render("listings/new.ejs");
