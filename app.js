@@ -8,11 +8,10 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 require("dotenv").config(); // Load env variables
-require("./config/db.js"); // Connect to DB
-
-const ExpressError = require("./utils/ExpressError.js");
+require("./config/dbConfig.js"); // Connect to DB
 
 // Route files
 const userRoute = require("./routes/user.js");

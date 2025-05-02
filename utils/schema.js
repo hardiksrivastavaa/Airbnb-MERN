@@ -7,7 +7,10 @@ module.exports.listingSchema = Joi.object({
         description: Joi.string().required(),
         location: Joi.string().required(),
         country: Joi.string().required(),
-        image: Joi.string().required().allow("", null),
+        geometry: Joi.object({
+            type: Joi.string().valid("Point").required(),
+            coordinates: Joi.array().items(Joi.number()).length(2).required()
+        }).required()
     }).required(),
 });
 

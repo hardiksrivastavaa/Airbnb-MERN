@@ -4,6 +4,7 @@ const Review = require("../models/review.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("../utils/schema.js");
 
+
 // Middleware to check if user is authenticated (logged in)
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -64,5 +65,40 @@ module.exports.validateReview = (req, res, next) => {
         throw new ExpressError(400, msg);
     } else {
         next();
+    }
+};
+
+// Middleware to geocode a listing's location and attach coordinates to the request body
+module.exports.geocodeLocation = async (req, res, next) => {
+    try {
+
+        let { location, country } = req.body.listing;
+        let geometryLocation = `${location}, ${country}`;
+        const apiKey = process.env.MAP_API;
+
+        // Send a geocoding request to MapTiler
+        const geoRes = await fetch(`https://api.maptiler.com/geocoding/${encodeURIComponent(geometryLocation)}.json?key=${apiKey}`);
+        const geoData = await geoRes.json();
+
+        let coordinates;
+
+        // If geocoding returns valid results, extract coordinates from the first result
+        if (geoData.features && geoData.features.length > 0) {
+            coordinates = geoData.features[0].center;
+        } else {
+            // Default to New Delhi, India if no coordinates are found
+            coordinates = [77.2090, 28.6139];
+        }
+
+        // Attach the coordinates to the listing as a GeoJSON Point
+        req.body.listing.geometry = {
+            type: "Point",
+            coordinates: coordinates
+        };
+        
+        return next(); 
+    } catch (err) {
+        req.flash("error", "Something went wrong while creating the listing.");
+        res.redirect("/listings/new");
     }
 };

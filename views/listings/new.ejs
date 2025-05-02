@@ -2,9 +2,10 @@
 
   <div class="row m-1">
 
-    <div class="col-8 offset-2">
+    <div class="col-lg-8 col-10 offset-lg-2 offset-1">
 
-      <form action="/listings" method="post" class="mt-3 mb-5 needs-validation" id="new-listing-form" novalidate>
+      <form action="/listings" method="post" enctype="multipart/form-data" class="mt-3 mb-5 needs-validation"
+        id="new-listing-form" novalidate>
 
         <h1 class="text-center mb-3">New Listing</h1>
 
@@ -25,16 +26,18 @@
         </div>
 
         <div class="mb-3">
-          <label for="image" class="form-label">Image URL</label>
-          <input type="url" id="image" name="listing[image]" class="form-control" placeholder="Enter the image URL" />
+          <label for="image" class="form-label">Image</label>
+          <input type="file" id="image" name="listing[image]" class="form-control" accept=".jpg, .jpeg, .png" required />
+          <small class="form-text text-danger">Supported formats: JPG, JPEG, PNG</small>
+          <div class="valid-feedback">Great! Your image has been uploaded successfully.</div>
+          <div class="invalid-feedback">Please upload a valid image file.</div>
         </div>
-
+        
         <div class="row">
 
           <div class="mb-3 col-md-4">
             <label for="price" class="form-label">Price</label>
-            <input id="price" name="listing[price]" class="form-control" placeholder="Enter the price"
-              required />
+            <input id="price" name="listing[price]" class="form-control" placeholder="Enter the price" required />
             <div class="valid-feedback">Price Looks good!</div>
             <div class="invalid-feedback">Valid Price Should be Entered!</div>
           </div>
