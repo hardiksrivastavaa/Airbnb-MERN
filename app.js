@@ -13,7 +13,6 @@ const ExpressError = require("./utils/ExpressError.js");
 
 require("dotenv").config(); // Load env variables
 require("./config/dbConfig.js"); // Connect to DB
-const MongoURL = process.env.ATLAS_URL;
 
 // Route files
 const userRoute = require("./routes/user.js");
@@ -31,9 +30,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 
-// Session configuration
+// Session Store configuration
 const store = MongoStore.create({
-    mongoUrl: MongoURL,
+    mongoUrl: process.env.ATLAS_URL,
     crypto: {
         secret: process.env.SESSION_SECRET,
     },
@@ -93,15 +92,18 @@ app.all("*", (req, res, next) => {
 // Error handler
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong" } = err;
-    res.status(statusCode).render("error.ejs", { message });
+
+    // Get the Referer header to redirect back to the same page
+    let redirectUrl = req.header("Referer") || "/";
+    req.flash("error", message);
+    res.status(statusCode).redirect(redirectUrl);
 });
 
 if (process.env.NODE_ENV !== "production") {
-    app.listen(process.env.PORT, () => {
-        console.log(`Server is listening at http://localhost:${PORT}`);
+    app.listen(8080, () => {
+        console.log("Server is listening at 8080");
     });
 } else {
-    // In production, you might export the app for serverless or cloud functions
     module.exports = app;
 }
 

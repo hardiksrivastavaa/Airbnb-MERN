@@ -34,7 +34,7 @@ body {
 }
 
 .f-info-links a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 /* Index Page */
@@ -51,6 +51,11 @@ body {
     font-size: 1rem !important;
     color: white !important;
     border-radius: 0.5rem !important;
+    cursor: pointer !important;
+}
+
+button {
+    cursor: pointer !important;
 }
 
 #cancel-btn {
@@ -84,4 +89,8 @@ body {
     opacity: 1;
     font-weight: bold;
     cursor: pointer;
+}
+
+a {
+    text-decoration: none !important;
 }

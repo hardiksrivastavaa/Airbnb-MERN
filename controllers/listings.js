@@ -6,21 +6,21 @@ module.exports.renderListings = async (req, res) => {
     res.render("listings/index.ejs", { allListings });
 };
 
+// Handle searching of listings based on their category
 module.exports.renderCategoryListings = async (req, res) => {
     const { category } = req.params;
     const listings = await Listing.find({ category });
     res.render("listings/index", { allListings: listings });
 };
 
-// In your routes
+// Handle searching of listings
 module.exports.searchListings = async (req, res) => {
-    const query = req.query.query; // Get search query from URL parameters
+    const query = req.query.query; 
     const listings = await Listing.find({
         title: { $regex: query, $options: "i" } // 'i' for case-insensitive matching
     });
     res.render("listings/index", { allListings: listings });
 };
-
 
 // Render form to create a new listing
 module.exports.renderNewListingForm = (req, res) => {
@@ -57,7 +57,7 @@ module.exports.showSpecificListing = async (req, res) => {
         req.flash("error", "Listing you requested for does not exists!");
         return res.redirect("/listings");
     }
-
+    
     res.render("listings/show.ejs", { listing });
 };
 

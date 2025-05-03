@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
-const MongoURL = process.env.ATLAS_URL;
 
+let dbUrl;
+
+if (process.env.NODE_ENV !== "production") {
+    dbUrl = process.env.MONGO_URL;
+} else {
+    dbUrl = process.env.ATLAS_URL;
+}
 connectedToDatabase()
     .then(() => {
         console.log("Connected to MongoDB");
@@ -10,7 +16,7 @@ connectedToDatabase()
     });
 
 async function connectedToDatabase() {
-    await mongoose.connect(MongoURL);
+    await mongoose.connect(dbUrl);
 }
 
 module.exports = connectedToDatabase;
