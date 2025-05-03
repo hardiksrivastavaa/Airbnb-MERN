@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const MongoURL = process.env.ATLAS_URL;
 
-dbConnect()
+connectedToDatabase()
     .then(() => {
         console.log("Connected to MongoDB");
     })
@@ -9,8 +9,10 @@ dbConnect()
         console.error("Error connecting to MongoDB", err);
     });
 
-async function dbConnect() {
+async function connectedToDatabase() {
     await mongoose.connect(MongoURL);
 }
 
-module.exports = dbConnect;
+module.exports = connectedToDatabase;
+
+

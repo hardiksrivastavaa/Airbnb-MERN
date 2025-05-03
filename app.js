@@ -97,12 +97,11 @@ app.use((err, req, res, next) => {
 });
 
 if (process.env.NODE_ENV !== "production") {
-    app.listen(process.env.PORT, async () => {
+    app.listen(process.env.PORT, () => {
         console.log(`Server is listening at http://localhost:${PORT}`);
-        await connectedToDatabase();
     });
 } else {
-    await connectedToDatabase();
+    // In production, you might export the app for serverless or cloud functions
+    module.exports = app;
 }
 
-module.exports = app;
