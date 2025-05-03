@@ -74,10 +74,9 @@ app.use((req, res, next) => {
     next();
 });
 
-// Home route
 app.get("/", (req, res) => {
     res.redirect("/listings");
-});
+})
 
 // Mounting routes
 app.use("/", userRoute);
@@ -92,12 +91,16 @@ app.all("*", (req, res, next) => {
 // Error handler
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong" } = err;
-
     // Get the Referer header to redirect back to the same page
     let redirectUrl = req.header("Referer") || "/";
     req.flash("error", message);
     res.status(statusCode).redirect(redirectUrl);
 });
+
+// app.use((err, req, res, next) => {
+//     console.error("🔥 Global error caught:", err.stack || err);
+//     res.status(500).send("Something broke!");
+// });
 
 if (process.env.NODE_ENV !== "production") {
     app.listen(8080, () => {

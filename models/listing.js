@@ -47,4 +47,5 @@ listingSchema.post("findOneAndDelete", async (listing) => {
     }
 });
 
-module.exports.Listing = mongoose.model("Listing", listingSchema);
+Listing = mongoose.model("Listing", listingSchema);
+module.exports = Listing; 

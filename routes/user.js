@@ -8,22 +8,22 @@ const wrapAsync = require("../utils/wrapAsync.js");
 
 // Route to show signup form and handle user registration
 router.route("/signup")
-    .get(userController.showSignUpForm) // Render signup form
-    .post(wrapAsync(userController.handleSignUpLogic)); // Handle new user signup
+    .get(userController.showSignUpForm) 
+    .post(wrapAsync(userController.handleSignUpLogic));
 
 // Route to show login form and handle user login
 router.route("/login")
-    .get(userController.showLoginForm) // Render login form
+    .get(userController.showLoginForm)
     .post(
-        saveRedirectUrl, // Save the original URL the user wanted to access
+        saveRedirectUrl, 
         passport.authenticate("local", {
-            failureRedirect: "/login", // Redirect back on login failure
-            failureFlash: true,        // Show flash message on failure
+            failureRedirect: "/login", 
+            failureFlash: true,        
         }),
-        userController.handleLoginLogic // Custom login logic on success
+        userController.handleLoginLogic 
     );
 
 // Logout route
-router.get("/logout", userController.handleLogoutLogic); // Log the user out and redirect
+router.get("/logout", userController.handleLogoutLogic); 
 
 module.exports = router;
