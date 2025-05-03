@@ -3,9 +3,7 @@ require("dotenv").config({ path: "../.env" });
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
 
-const MongoURL = process.env.MONGO_URL;
-
-console.log("MongoURL", MongoURL);
+const MongoURL = process.env.ATLAS_URL;
 
 main()
     .then(() => {
@@ -22,7 +20,7 @@ async function main() {
 const initDB = async () => {
     await Listing.deleteMany({});
     console.log("Deleted all Listings from the database");
-    initData.data = initData.data.map((obj) => ({...obj, owner: "68132bade83778c6f44282d9" }));
+    initData.data = initData.data.map((obj) => ({...obj, owner: "6815845cb3682e0f7b4365e4" }));
     await Listing.insertMany(initData.data);
     console.log("Inserted initial data into the database");
 };

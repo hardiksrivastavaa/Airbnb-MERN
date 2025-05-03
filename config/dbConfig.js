@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const MongoURL = process.env.MONGO_URL;
+const MongoURL = process.env.ATLAS_URL;
 
 dbConnect()
     .then(() => {

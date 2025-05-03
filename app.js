@@ -4,6 +4,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -12,6 +13,7 @@ const ExpressError = require("./utils/ExpressError.js");
 
 require("dotenv").config(); // Load env variables
 require("./config/dbConfig.js"); // Connect to DB
+const MongoURL = process.env.ATLAS_URL;
 
 // Route files
 const userRoute = require("./routes/user.js");
@@ -30,7 +32,21 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 
 // Session configuration
+const store = MongoStore.create({
+    mongoUrl: MongoURL,
+    crypto: {
+        secret: process.env.SESSION_SECRET,
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+    console.log("Error in Mongo Session Store", err);
+});
+
+// Session configuration
 const sessionOptions = {
+    store,
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
@@ -80,7 +96,13 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("error.ejs", { message });
 });
 
-// Start server
-app.listen(process.env.PORT || 8080, () => {
-    console.log("Server is running on port 8080");
-});
+if (process.env.NODE_ENV !== "production") {
+    app.listen(process.env.PORT, async () => {
+        console.log(`Server is listening at http://localhost:${PORT}`);
+        await connectedToDatabase();
+    });
+} else {
+    await connectedToDatabase();
+}
+
+module.exports = app;
