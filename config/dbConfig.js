@@ -20,5 +20,3 @@ async function connectedToDatabase() {
 }
 
 module.exports = connectedToDatabase;
-
-

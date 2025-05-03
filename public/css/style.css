@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
@@ -25,8 +25,23 @@ body {
     font-size: 2.5rem;
 }
 
+.logo_text {
+    color: #fe424d;
+    font-family: "Poppins", sans-serif !important;
+}
+
 .nav-link {
     color: #222222 !important;
+}
+
+.filter {
+    opacity: 0.8;
+}
+
+.filter:hover {
+    opacity: 1;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 /* Footer */
@@ -46,7 +61,7 @@ body {
     background-color: white;
 }
 
-/* New Listing Page */
+/* All button Related Styling */
 
 .btn {
     padding: 0.5rem 1rem !important;
@@ -54,19 +69,6 @@ body {
     color: white !important;
     border-radius: 0.5rem !important;
     cursor: pointer !important;
-}
-
-button {
-    cursor: pointer !important;
-}
-
-#cancel-btn {
-    background-color: #222222;
-}
-
-.logo_text {
-    color: #fe424d;
-    font-family: "Poppins", sans-serif !important;
 }
 
 #submit-btn {
@@ -84,20 +86,12 @@ button {
     transition: all 0.3s ease-in-out;
 }
 
-#map {
-    height: 500px;
-}
-
-.filter {
-    opacity: 0.8;
-}
-
-.filter:hover {
-    opacity: 1;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 a {
     text-decoration: none !important;
+}
+
+/* Map */
+
+#map {
+    height: 500px;
 }

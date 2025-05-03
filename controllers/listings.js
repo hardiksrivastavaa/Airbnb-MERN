@@ -15,7 +15,7 @@ module.exports.renderCategoryListings = async (req, res) => {
 
 // Handle searching of listings
 module.exports.searchListings = async (req, res) => {
-    const query = req.query.query; 
+    const query = req.query.query;
     const listings = await Listing.find({
         title: { $regex: query, $options: "i" } // 'i' for case-insensitive matching
     });
@@ -57,7 +57,7 @@ module.exports.showSpecificListing = async (req, res) => {
         req.flash("error", "Listing you requested for does not exists!");
         return res.redirect("/listings");
     }
-    
+
     res.render("listings/show.ejs", { listing });
 };
 
