@@ -43,8 +43,8 @@ Building **Wanderlust** was a deep dive into full-stack development. Here's what
 
 ## 🔗 Links
 
-- **🔴 Live App**: [https://lnkd.in/gz3CNg6m](https://lnkd.in/gz3CNg6m)  
-- **📂 GitHub Repo**: [https://lnkd.in/ggu-EAS6](https://lnkd.in/ggu-EAS6)
+- **🔴 Live App**: [wanderlust-mern.vercel.app](https://wanderlust-mern.vercel.app)  
+- **📂 GitHub Repo**: [github.com/hardiksrivastavaa/Wanderlust-MERN](https://github.com/hardiksrivastavaa/Wanderlust-MERN)
 
 ---
 
